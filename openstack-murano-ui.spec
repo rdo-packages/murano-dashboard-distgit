@@ -9,7 +9,7 @@ Summary:        The UI component for the OpenStack murano service
 Group:          Applications/Communications
 License:        ASL 2.0
 URL:            https://github.com/openstack/%{pypi_name}
-Source0:        http://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
+Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
 BuildRequires:  gettext
 BuildRequires:  openstack-dashboard
 BuildRequires:  python-beautifulsoup4
