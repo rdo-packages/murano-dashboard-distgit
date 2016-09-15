@@ -1,3 +1,5 @@
-# UUID                                  	Group Name
-#
-0234b642df46fde28868af97a394aadf7e94df1c	openstack/murano-dashboard-distgit-ptl
+# UUID          Group Name
+False 	Non-Interactive Users
+20ecef08fe5240d4869337616c463b3ab3d5913c       	openstack/murano-dashboard-distgit-core
+0234b642df46fde28868af97a394aadf7e94df1c        	openstack/murano-dashboard-distgit-ptl
+global:Registered-Users		Registered Users
