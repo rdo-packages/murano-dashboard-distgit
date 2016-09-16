@@ -1,4 +1,4 @@
-%{!?upstream_version: %global upstream_version %{version}.%{?milestone}}
+%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
 
