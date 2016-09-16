@@ -21,7 +21,7 @@ BuildRequires:  python-mox3
 BuildRequires:  python-muranoclient
 BuildRequires:  python-nose
 BuildRequires:  python-openstack-nose-plugin
-BuildRequires:  python-oslo-config >= 2:3.14.0
+BuildRequires:  python-oslo-config >= 2:3.7.0
 BuildRequires:  python-pbr >= 1.6
 BuildRequires:  python-semantic-version
 BuildRequires:  python-setuptools
@@ -86,7 +86,7 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 mkdir -p %{buildroot}/var/cache/murano-dashboard
 # Enable Horizon plugin for murano-dashboard
-cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/local_settings.d/_50_murano.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
+cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/_50_murano.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
 
 %check
 export PYTHONPATH="%{_datadir}/openstack-dashboard:%{python2_sitearch}:%{python2_sitelib}:%{buildroot}%{python2_sitelib}"
