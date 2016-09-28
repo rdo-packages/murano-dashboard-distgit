@@ -1,5 +1,5 @@
-%global milestone .0rc1
-%{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+%global milestone .0rc2
+%{!?upstream_version: %global upstream_version %{version}.%{?milestone}}
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
 
@@ -12,7 +12,7 @@ License:        ASL 2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        http://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
 #
-# patches_base=3.0.0.0rc1
+# patches_base=3.0.0.0rc2
 #
 
 BuildRequires:  gettext
@@ -122,6 +122,9 @@ fi
 %doc doc/build/html
 
 %changelog
-* Thu Sep 15 2016 Alfredo Moralejo <amoralej@redhat.com> 3.0.0-0.1
+* Thu Sep 29 2016 Haikel Guemar <hguemar@fedoraproject.org> 3.0.0-0.1.0rc2
+- Update to 3.0.0.0rc2
+
+* Thu Sep 15 2016 Alfredo Moralejo <amoralej@redhat.com> 3.0.0-0.1rc1
 - Update to 3.0.0.0rc1
 
