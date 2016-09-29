@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dacfb570_242bbcec",
+        "filename": "openstack-murano-ui.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2016-09-29T07:27:41Z",
+      "side": 1,
+      "message": "Extra \u0027.\u0027 removed in previous commits has been re-introduced.",
+      "range": {
+        "startLine": 2,
+        "startChar": 57,
+        "endLine": 2,
+        "endChar": 58
+      },
+      "revId": "c9af66715da003a27652e6d59143b076afde9fef",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
