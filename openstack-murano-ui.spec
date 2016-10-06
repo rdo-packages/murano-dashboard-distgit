@@ -126,3 +126,4 @@ fi
 * Thu Sep 15 2016 Alfredo Moralejo <amoralej@redhat.com> 3.0.0-0.1.0rc1
 - Update to 3.0.0.0rc1
 
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/murano-dashboard/commit/?id=e3927b072490309a47a5aedfcc409e350954d576
