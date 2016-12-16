@@ -117,3 +117,4 @@ fi
 %doc doc/build/html
 
 %changelog
+# REMOVEME: error caused by commit http://git.openstack.org/cgit/openstack/murano-dashboard/commit/?id=80514a3bdc8287d163bee2ce919424a89d5f7ba9
