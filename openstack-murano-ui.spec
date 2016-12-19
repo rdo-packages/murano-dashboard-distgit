@@ -89,9 +89,8 @@ mkdir -p %{buildroot}/var/cache/murano-dashboard
 cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/local_settings.d/_50_murano.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
 
 %check
-# FIXME(jpena): re-enable tests once https://review.openstack.org/411771 has been merged
 export PYTHONPATH="%{_datadir}/openstack-dashboard:%{python2_sitearch}:%{python2_sitelib}:%{buildroot}%{python2_sitelib}"
-%{__python2} manage.py test muranodashboard --settings=muranodashboard.tests.settings || :
+%{__python2} manage.py test muranodashboard --settings=muranodashboard.tests.settings
 
 %post
 HORIZON_SETTINGS='/etc/openstack-dashboard/local_settings'
