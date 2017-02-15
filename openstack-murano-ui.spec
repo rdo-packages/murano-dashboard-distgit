@@ -28,7 +28,7 @@ BuildRequires:  python-setuptools
 BuildRequires:  python-testtools
 BuildRequires:  python-yaql >= 1.1.0
 Requires:       openstack-dashboard
-Requires:       PyYAML >= 3.1.0
+Requires:       PyYAML >= 3.10
 Requires:       python-babel >= 2.3.4
 Requires:       python-beautifulsoup4
 Requires:       python-django >= 1.8
@@ -36,7 +36,7 @@ Requires:       python-django-babel
 Requires:       python-django-formtools
 Requires:       python-iso8601 >= 0.1.11
 Requires:       python-muranoclient >= 0.8.2
-Requires:       python-oslo-log >= 1.14.0
+Requires:       python-oslo-log >= 3.11.0
 Requires:       python-semantic-version
 Requires:       python-six >= 1.9.0
 Requires:       python-yaql >= 1.1.0
