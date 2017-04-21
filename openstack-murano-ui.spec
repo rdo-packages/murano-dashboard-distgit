@@ -84,9 +84,11 @@ rm -rf doc/build/html/.{doctrees,buildinfo}
 %install
 %py2_install
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
+mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mkdir -p %{buildroot}/var/cache/murano-dashboard
 # Enable Horizon plugin for murano-dashboard
-cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/local_settings.d/_50_murano.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
+cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/local_settings.d/_50_murano.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/
+cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/enabled/_*.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
 
 %check
 export PYTHONPATH="%{_datadir}/openstack-dashboard:%{python2_sitearch}:%{python2_sitelib}:%{buildroot}%{python2_sitelib}"
@@ -109,6 +111,7 @@ fi
 %doc README.rst
 %{python2_sitelib}/muranodashboard
 %{python2_sitelib}/murano_dashboard*.egg-info
+%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/*
 %dir %attr(755, apache, apache) /var/cache/murano-dashboard
 
