@@ -11,6 +11,7 @@ License:        ASL 2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
 BuildRequires:  gettext
+BuildRequires:  git
 BuildRequires:  openstack-dashboard
 BuildRequires:  python-beautifulsoup4
 BuildRequires:  python-devel
@@ -65,7 +66,7 @@ with all other OpenStack resources.
 This package contains the documentation.
 
 %prep
-%setup -q -n %{pypi_name}-%{upstream_version}
+%autosetup -n %{pypi_name}-%{upstream_version} -S git
 # Let RPM handle the dependencies
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
