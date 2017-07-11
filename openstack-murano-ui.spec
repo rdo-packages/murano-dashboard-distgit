@@ -55,7 +55,7 @@ with all other OpenStack resources.
 %package doc
 Summary:        Documentation for OpenStack murano dashboard
 BuildRequires:  python-sphinx
-BuildRequires:  python-oslo-sphinx
+BuildRequires:  python-openstackdocstheme
 BuildRequires:  python-reno
 
 %description doc
