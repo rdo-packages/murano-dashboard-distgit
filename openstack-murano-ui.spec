@@ -14,6 +14,7 @@ BuildRequires:  gettext
 BuildRequires:  git
 BuildRequires:  openstack-dashboard
 BuildRequires:  python-beautifulsoup4
+BuildRequires:  python-castellan
 BuildRequires:  python-devel
 BuildRequires:  python-django-formtools
 BuildRequires:  python-django-nose
@@ -32,6 +33,7 @@ Requires:       openstack-dashboard
 Requires:       PyYAML >= 3.10
 Requires:       python-babel >= 2.3.4
 Requires:       python-beautifulsoup4
+Requires:       python-castellan >= 0.7.0
 Requires:       python-django >= 1.8
 Requires:       python-django-babel
 Requires:       python-django-formtools
