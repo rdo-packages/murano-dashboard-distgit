@@ -94,7 +94,6 @@ cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/local_set
 cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/enabled/_*.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
 
 %check
-export PYTHONPATH="%{_datadir}/openstack-dashboard:%{python2_sitearch}:%{python2_sitelib}:%{buildroot}%{python2_sitelib}"
 %{__python2} manage.py test muranodashboard --settings=muranodashboard.tests.settings
 
 %post
