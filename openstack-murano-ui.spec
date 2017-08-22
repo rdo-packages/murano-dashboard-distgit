@@ -39,10 +39,12 @@ Requires:       python-django-babel
 Requires:       python-django-formtools
 Requires:       python-iso8601 >= 0.1.11
 Requires:       python-muranoclient >= 0.8.2
-Requires:       python-oslo-log >= 3.11.0
+Requires:       python-oslo-log >= 3.22.0
+Requires:       python-pbr
 Requires:       python-semantic-version
 Requires:       python-six >= 1.9.0
 Requires:       python-yaql >= 1.1.0
+Requires:       pytz
 BuildArch:      noarch
 
 %description
