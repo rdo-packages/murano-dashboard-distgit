@@ -74,6 +74,11 @@ This package contains the documentation.
 # Let RPM handle the dependencies
 rm -rf {test-,}requirements.txt tools/{pip,test}-requires
 
+# disable warning-is-error, this project has intersphinx in docs
+# so some warnings are generated in network isolated build environment
+# as koji
+sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
+
 %build
 %py2_build
 # Generate i18n files
