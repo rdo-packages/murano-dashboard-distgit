@@ -29,6 +29,7 @@ BuildRequires:  python-semantic-version
 BuildRequires:  python-setuptools
 BuildRequires:  python-testtools
 BuildRequires:  python-yaql >= 1.1.0
+BuildRequires:  openstack-macros
 Requires:       openstack-dashboard
 Requires:       PyYAML >= 3.10
 Requires:       python-babel >= 2.3.4
@@ -72,7 +73,7 @@ This package contains the documentation.
 %prep
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
 # Let RPM handle the dependencies
-rm -rf {test-,}requirements.txt tools/{pip,test}-requires
+%py_req_cleanup
 
 # disable warning-is-error, this project has intersphinx in docs
 # so some warnings are generated in network isolated build environment
