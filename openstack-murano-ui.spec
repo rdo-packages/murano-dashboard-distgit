@@ -2,6 +2,12 @@
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
 
+%global common_desc \
+Murano Dashboard is an extension for OpenStack Dashboard that provides a UI \
+for Murano. With murano-dashboard, a user is able to easily manage and control \
+an application catalog, running applications and created environments alongside \
+with all other OpenStack resources.
+
 Name:           openstack-murano-ui
 Version:        XXX
 Release:        XXX
@@ -52,10 +58,7 @@ BuildArch:      noarch
 Murano Dashboard
 Sytem package - murano-dashboard
 Python package - murano-dashboard
-Murano Dashboard is an extension for OpenStack Dashboard that provides a UI
-for Murano. With murano-dashboard, a user is able to easily manage and control
-an application catalog, running applications and created environments alongside
-with all other OpenStack resources.
+%{common_desc}
 
 %package doc
 Summary:        Documentation for OpenStack murano dashboard
@@ -64,10 +67,8 @@ BuildRequires:  python-openstackdocstheme
 BuildRequires:  python-reno
 
 %description doc
-Murano Dashboard is an extension for OpenStack Dashboard that provides a UI
-for Murano. With murano-dashboard, a user is able to easily manage and control
-an application catalog, running applications and created environments alongside
-with all other OpenStack resources.
+%{common_desc}
+
 This package contains the documentation.
 
 %prep
