@@ -16,6 +16,24 @@
       "revId": "5a63d68cf129150e3b0b024c8754b8877236091e",
       "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a72e520_857ba228",
+        "filename": "openstack-murano-ui.spec",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2017-12-18T15:55:27Z",
+      "side": 1,
+      "message": "Mmm, a local test using a Fedora Rawhide builroot passed for me, so let\u0027s go ahead",
+      "parentUuid": "5a72e520_65b066f5",
+      "revId": "5a63d68cf129150e3b0b024c8754b8877236091e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
     }
   ]
 }
