@@ -20,37 +20,37 @@ BuildRequires:  gettext
 BuildRequires:  git
 BuildRequires:  openstack-dashboard
 BuildRequires:  python-beautifulsoup4
-BuildRequires:  python-castellan
-BuildRequires:  python-devel
-BuildRequires:  python-django-formtools
-BuildRequires:  python-django-nose
-BuildRequires:  python-mock
-BuildRequires:  python-mox3
-BuildRequires:  python-muranoclient
-BuildRequires:  python-nose
+BuildRequires:  python2-castellan
+BuildRequires:  python2-devel
+BuildRequires:  python2-django-formtools
+BuildRequires:  python2-django-nose
+BuildRequires:  python2-mock
+BuildRequires:  python2-mox3
+BuildRequires:  python2-muranoclient
+BuildRequires:  python2-nose
 BuildRequires:  python-openstack-nose-plugin
-BuildRequires:  python-oslo-config >= 2:3.14.0
-BuildRequires:  python-pbr >= 1.6
+BuildRequires:  python2-oslo-config >= 2:5.1.0
+BuildRequires:  python2-pbr >= 1.6
 BuildRequires:  python-semantic-version
-BuildRequires:  python-setuptools
-BuildRequires:  python-testtools
-BuildRequires:  python-yaql >= 1.1.0
+BuildRequires:  python2-setuptools
+BuildRequires:  python2-testtools
+BuildRequires:  python2-yaql >= 1.1.3
 BuildRequires:  openstack-macros
 Requires:       openstack-dashboard
 Requires:       PyYAML >= 3.10
-Requires:       python-babel >= 2.3.4
+Requires:       python2-babel >= 2.3.4
 Requires:       python-beautifulsoup4
-Requires:       python-castellan >= 0.7.0
-Requires:       python-django >= 1.8
-Requires:       python-django-babel
-Requires:       python-django-formtools
-Requires:       python-iso8601 >= 0.1.11
-Requires:       python-muranoclient >= 0.8.2
-Requires:       python-oslo-log >= 3.22.0
-Requires:       python-pbr
+Requires:       python2-castellan >= 0.16.0
+Requires:       python2-django >= 1.8
+Requires:       python2-django-babel
+Requires:       python2-django-formtools
+Requires:       python2-iso8601 >= 0.1.11
+Requires:       python2-muranoclient >= 0.8.2
+Requires:       python2-oslo-log >= 3.36.0
+Requires:       python2-pbr
 Requires:       python-semantic-version
-Requires:       python-six >= 1.9.0
-Requires:       python-yaql >= 1.1.0
+Requires:       python2-six >= 1.10.0
+Requires:       python2-yaql >= 1.1.3
 Requires:       pytz
 BuildArch:      noarch
 
@@ -62,9 +62,9 @@ Python package - murano-dashboard
 
 %package doc
 Summary:        Documentation for OpenStack murano dashboard
-BuildRequires:  python-sphinx
-BuildRequires:  python-openstackdocstheme
-BuildRequires:  python-reno
+BuildRequires:  python2-sphinx
+BuildRequires:  python2-openstackdocstheme
+BuildRequires:  python2-reno
 
 %description doc
 %{common_desc}
