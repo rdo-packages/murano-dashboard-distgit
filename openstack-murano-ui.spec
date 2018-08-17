@@ -30,7 +30,7 @@ BuildRequires:  python2-muranoclient
 BuildRequires:  python2-nose
 BuildRequires:  python-openstack-nose-plugin
 BuildRequires:  python2-oslo-config >= 2:5.1.0
-BuildRequires:  python2-pbr >= 1.6
+BuildRequires:  python2-pbr >= 2.0.0
 BuildRequires:  python-semantic-version
 BuildRequires:  python2-setuptools
 BuildRequires:  python2-testtools
@@ -40,7 +40,7 @@ Requires:       openstack-dashboard
 Requires:       PyYAML >= 3.10
 Requires:       python2-babel >= 2.3.4
 Requires:       python-beautifulsoup4
-Requires:       python2-castellan >= 0.16.0
+Requires:       python2-castellan >= 0.18.0
 Requires:       python2-django >= 1.8
 Requires:       python2-django-babel
 Requires:       python2-django-formtools
