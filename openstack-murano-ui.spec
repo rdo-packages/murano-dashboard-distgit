@@ -1,3 +1,4 @@
+%global milestone .0rc1
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
@@ -9,13 +10,17 @@ an application catalog, running applications and created environments alongside 
 with all other OpenStack resources.
 
 Name:           openstack-murano-ui
-Version:        XXX
-Release:        XXX
+Version:        6.0.0
+Release:        0.1%{?milestone}%{?dist}
 Summary:        The UI component for the OpenStack murano service
 Group:          Applications/Communications
 License:        ASL 2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
+#
+# patches_base=6.0.0.0rc1
+#
+
 BuildRequires:  gettext
 BuildRequires:  git
 BuildRequires:  openstack-dashboard
@@ -134,3 +139,6 @@ fi
 %doc doc/build/html
 
 %changelog
+* Mon Aug 20 2018 RDO <dev@lists.rdoproject.org> 6.0.0-0.1.0rc1
+- Update to 6.0.0.0rc1
+
