@@ -56,12 +56,14 @@ BuildRequires:  python%{pyver}-beautifulsoup4
 BuildRequires:  python%{pyver}-semantic_version
 %endif
 
-Requires:       openstack-dashboard
+Requires:       openstack-dashboard >= 15.0.0
 Requires:       python%{pyver}-babel >= 2.3.4
 Requires:       python%{pyver}-castellan >= 0.18.0
 Requires:       python%{pyver}-django >= 1.8
 Requires:       python%{pyver}-django-babel
 Requires:       python%{pyver}-django-formtools
+# django-floppyforms is not packaged in Fedora yet.
+#Requires:       python%{pyver}-django-floppyforms
 Requires:       python%{pyver}-iso8601 >= 0.1.11
 Requires:       python%{pyver}-muranoclient >= 0.8.2
 Requires:       python%{pyver}-oslo-log >= 3.36.0
