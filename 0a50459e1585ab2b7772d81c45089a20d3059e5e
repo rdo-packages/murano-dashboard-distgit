@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92c131f8_7adcd106",
+        "filename": "openstack-murano-ui.spec",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2019-03-19T15:06:34Z",
+      "side": 1,
+      "message": "i wonder if murano-ui works at all withouth this [1]. I\u0027m not sure if someone is actually testing it.\n\n[1] https://github.com/openstack/murano-dashboard/blob/35473d1b1a216bda1fbce6684e5191295d6a3e8f/muranodashboard/common/widgets.py#L17",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 50
+      },
+      "revId": "0a50459e1585ab2b7772d81c45089a20d3059e5e",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
