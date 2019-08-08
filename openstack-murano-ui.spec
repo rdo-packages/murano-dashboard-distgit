@@ -13,6 +13,7 @@
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
+%global with_doc 1
 
 %global common_desc \
 Murano Dashboard is an extension for OpenStack Dashboard that provides a UI \
@@ -88,6 +89,7 @@ Sytem package - murano-dashboard
 Python package - murano-dashboard
 %{common_desc}
 
+%if 0%{?with_doc}
 %package doc
 Summary:        Documentation for OpenStack murano dashboard
 BuildRequires:  python%{pyver}-sphinx
@@ -98,6 +100,7 @@ BuildRequires:  python%{pyver}-reno
 %{common_desc}
 
 This package contains the documentation.
+%endif
 
 %prep
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
@@ -115,11 +118,14 @@ sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
 pushd build/lib/%{mod_name}
 django-admin compilemessages
 popd
+
+%if 0%{?with_doc}
 # generate html docs
 export OSLO_PACKAGE_VERSION=%{upstream_version}
 %{pyver_bin} setup.py build_sphinx -b html
 # remove the sphinx-build-%{pyver} leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
+%endif
 
 %install
 %{pyver_install}
@@ -157,8 +163,10 @@ fi
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/*
 %dir %attr(755, apache, apache) /var/cache/murano-dashboard
 
+%if 0%{?with_doc}
 %files doc
 %license LICENSE
 %doc doc/build/html
+%endif
 
 %changelog
