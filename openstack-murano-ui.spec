@@ -1,3 +1,4 @@
+%global milestone .0rc1
 # Macros for py2/py3 compatibility
 %if 0%{?fedora} || 0%{?rhel} > 7
 %global pyver %{python3_pkgversion}
@@ -22,13 +23,17 @@ an application catalog, running applications and created environments alongside 
 with all other OpenStack resources.
 
 Name:           openstack-murano-ui
-Version:        XXX
-Release:        XXX
+Version:        8.0.0
+Release:        0.1%{?milestone}%{?dist}
 Summary:        The UI component for the OpenStack murano service
 Group:          Applications/Communications
 License:        ASL 2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
+#
+# patches_base=8.0.0.0rc1
+#
+
 BuildArch:      noarch
 
 BuildRequires:  gettext
@@ -170,3 +175,6 @@ fi
 %endif
 
 %changelog
+* Mon Sep 30 2019 RDO <dev@lists.rdoproject.org> 8.0.0-0.1.0rc1
+- Update to 8.0.0.0rc1
+
