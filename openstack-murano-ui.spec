@@ -1,15 +1,3 @@
-# Macros for py2/py3 compatibility
-%if 0%{?fedora} || 0%{?rhel} > 7
-%global pyver %{python3_pkgversion}
-%else
-%global pyver 2
-%endif
-%global pyver_bin python%{pyver}
-%global pyver_sitelib %python%{pyver}_sitelib
-%global pyver_sitearch %python%{pyver}_sitearch
-%global pyver_install %py%{pyver}_install
-%global pyver_build %py%{pyver}_build
-# End of macros for py2/py3 compatibility
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
@@ -34,54 +22,37 @@ BuildArch:      noarch
 BuildRequires:  gettext
 BuildRequires:  git
 BuildRequires:  openstack-dashboard
-BuildRequires:  python%{pyver}-castellan
-BuildRequires:  python%{pyver}-devel
-BuildRequires:  python%{pyver}-django-formtools
-BuildRequires:  python%{pyver}-django-nose
-BuildRequires:  python%{pyver}-mock
-BuildRequires:  python%{pyver}-mox3
-BuildRequires:  python%{pyver}-muranoclient
-BuildRequires:  python%{pyver}-nose
-BuildRequires:  python%{pyver}-oslo-config >= 2:5.1.0
-BuildRequires:  python%{pyver}-pbr >= 2.0.0
-BuildRequires:  python%{pyver}-setuptools
-BuildRequires:  python%{pyver}-testtools
-BuildRequires:  python%{pyver}-yaql >= 1.1.3
+BuildRequires:  python3-castellan
+BuildRequires:  python3-devel
+BuildRequires:  python3-django-formtools
+BuildRequires:  python3-django-nose
+BuildRequires:  python3-mock
+BuildRequires:  python3-mox3
+BuildRequires:  python3-muranoclient
+BuildRequires:  python3-nose
+BuildRequires:  python3-oslo-config >= 2:5.1.0
+BuildRequires:  python3-pbr >= 2.0.0
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-testtools
+BuildRequires:  python3-yaql >= 1.1.3
 BuildRequires:  openstack-macros
-# Handle python2 exception
-%if %{pyver} == 2
-BuildRequires:  python-beautifulsoup4
-BuildRequires:  python-semantic_version
-%else
-BuildRequires:  python%{pyver}-beautifulsoup4
-BuildRequires:  python%{pyver}-semantic_version
-%endif
+BuildRequires:  python3-beautifulsoup4
+BuildRequires:  python3-semantic_version
 
-Requires:       openstack-dashboard >= 15.0.0
-Requires:       python%{pyver}-babel >= 2.3.4
-Requires:       python%{pyver}-castellan >= 0.18.0
-Requires:       python%{pyver}-django >= 1.8
-Requires:       python%{pyver}-django-babel
-Requires:       python%{pyver}-django-formtools
+Requires:       openstack-dashboard >= 18.3.0
+Requires:       python3-castellan >= 0.18.0
+Requires:       python3-django-formtools
 # django-floppyforms is not packaged in Fedora yet.
-#Requires:       python%{pyver}-django-floppyforms
-Requires:       python%{pyver}-iso8601 >= 0.1.11
-Requires:       python%{pyver}-muranoclient >= 0.8.2
-Requires:       python%{pyver}-oslo-log >= 3.36.0
-Requires:       python%{pyver}-pbr
-Requires:       python%{pyver}-six >= 1.10.0
-Requires:       python%{pyver}-yaql >= 1.1.3
-Requires:       python%{pyver}-pytz
-# Handle python2 exception
-%if %{pyver} == 2
-Requires:       PyYAML >= 3.10
-Requires:       python-beautifulsoup4
-Requires:       python-semantic_version
-%else
-Requires:       python%{pyver}-PyYAML >= 3.10
-Requires:       python%{pyver}-beautifulsoup4
-Requires:       python%{pyver}-semantic_version
-%endif
+#Requires:       python3-django-floppyforms
+Requires:       python3-iso8601 >= 0.1.11
+Requires:       python3-muranoclient >= 0.8.2
+Requires:       python3-oslo-log >= 3.36.0
+Requires:       python3-pbr
+Requires:       python3-yaql >= 1.1.3
+Requires:       python3-pytz
+Requires:       python3-PyYAML >= 3.10
+Requires:       python3-beautifulsoup4
+Requires:       python3-semantic_version
 
 %description
 Murano Dashboard
@@ -92,9 +63,9 @@ Python package - murano-dashboard
 %if 0%{?with_doc}
 %package doc
 Summary:        Documentation for OpenStack murano dashboard
-BuildRequires:  python%{pyver}-sphinx
-BuildRequires:  python%{pyver}-openstackdocstheme
-BuildRequires:  python%{pyver}-reno
+BuildRequires:  python3-sphinx
+BuildRequires:  python3-openstackdocstheme
+BuildRequires:  python3-reno
 
 %description doc
 %{common_desc}
@@ -113,7 +84,7 @@ This package contains the documentation.
 sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
 
 %build
-%{pyver_build}
+%{py3_build}
 # Generate i18n files
 pushd build/lib/%{mod_name}
 django-admin compilemessages
@@ -122,13 +93,13 @@ popd
 %if 0%{?with_doc}
 # generate html docs
 export OSLO_PACKAGE_VERSION=%{upstream_version}
-sphinx-build-%{pyver} -b html doc/source doc/build/html
-# remove the sphinx-build-%{pyver} leftovers
+sphinx-build -b html doc/source doc/build/html
+# remove the sphinx-build leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{pyver_install}
+%{py3_install}
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mkdir -p %{buildroot}/var/cache/murano-dashboard
@@ -137,10 +108,10 @@ cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/local_set
 cp %{_builddir}/%{pypi_name}-%{upstream_version}/muranodashboard/local/enabled/_*.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/
 
 %check
-export PYTHONPATH="%{_datadir}/openstack-dashboard:%{pyver_sitearch}:%{pyver_sitelib}:%{buildroot}%{pyver_sitelib}"
+export PYTHONPATH="%{_datadir}/openstack-dashboard:%{python3_sitearch}:%{python3_sitelib}:%{buildroot}%{python3_sitelib}"
 # (TODO) Re-enable unit tests once package for openstack/heat-dashboard is included in RDO and https://review.openstack.org/#/c/527955/
 # is merged
-%{pyver_bin} manage.py test muranodashboard --settings=muranodashboard.tests.settings||:
+%{__python3} manage.py test muranodashboard --settings=muranodashboard.tests.settings||:
 
 %post
 HORIZON_SETTINGS='/etc/openstack-dashboard/local_settings'
@@ -157,8 +128,8 @@ fi
 %files
 %license LICENSE
 %doc README.rst
-%{pyver_sitelib}/muranodashboard
-%{pyver_sitelib}/murano_dashboard*.egg-info
+%{python3_sitelib}/muranodashboard
+%{python3_sitelib}/murano_dashboard*.egg-info
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/*
 %dir %attr(755, apache, apache) /var/cache/murano-dashboard
