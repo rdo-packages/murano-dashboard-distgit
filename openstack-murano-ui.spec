@@ -1,4 +1,6 @@
 %global milestone .0rc1
+%{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
+%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
@@ -18,11 +20,21 @@ Group:          Applications/Communications
 License:        ASL 2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
+# Required for tarball sources verification
+%if 0%{?sources_gpg} == 1
+Source101:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz.asc
+Source102:        https://releases.openstack.org/_static/%{sources_gpg_sign}.txt
+%endif
 #
 # patches_base=10.0.0.0rc1
 #
 
 BuildArch:      noarch
+
+# Required for tarball sources verification
+%if 0%{?sources_gpg} == 1
+BuildRequires:  /usr/bin/gpgv2
+%endif
 
 BuildRequires:  gettext
 BuildRequires:  git
@@ -79,6 +91,10 @@ This package contains the documentation.
 %endif
 
 %prep
+# Required for tarball sources verification
+%if 0%{?sources_gpg} == 1
+%{gpgverify}  --keyring=%{SOURCE102} --signature=%{SOURCE101} --data=%{SOURCE0}
+%endif
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
 # Let RPM handle the dependencies
 %py_req_cleanup
@@ -146,6 +162,9 @@ fi
 %endif
 
 %changelog
+* Wed Oct 14 2020 Joel Capitao <jcapitao@redhat.com> 10.0.0-0.1.0rc1
+- Enable sources tarball validation using GPG signature.
+
 * Thu Sep 24 2020 RDO <dev@lists.rdoproject.org> 10.0.0-0.1.0rc1
 - Update to 10.0.0.0rc1
 
