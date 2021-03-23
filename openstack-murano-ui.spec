@@ -51,19 +51,19 @@ BuildRequires:  openstack-macros
 BuildRequires:  python3-beautifulsoup4
 BuildRequires:  python3-semantic_version
 
-Requires:       openstack-dashboard >= 18.3.0
+Requires:       openstack-dashboard >= 18.3.1
 Requires:       python3-castellan >= 0.18.0
-Requires:       python3-django-formtools
+Requires:       python3-django-formtools >= 2.2
 # django-floppyforms is not packaged in Fedora yet.
 #Requires:       python3-django-floppyforms
 Requires:       python3-iso8601 >= 0.1.11
 Requires:       python3-muranoclient >= 0.8.2
 Requires:       python3-oslo-log >= 3.36.0
-Requires:       python3-pbr
+Requires:       python3-pbr >= 2.0.0
 Requires:       python3-yaql >= 1.1.3
-Requires:       python3-pytz
-Requires:       python3-PyYAML >= 3.10
-Requires:       python3-beautifulsoup4
+Requires:       python3-pytz >= 2013.6
+Requires:       python3-yaml >= 3.12
+Requires:       python3-beautifulsoup4 >= 4.6.0
 Requires:       python3-semantic_version
 
 %description
