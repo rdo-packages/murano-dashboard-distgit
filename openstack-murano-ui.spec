@@ -39,7 +39,6 @@ BuildRequires:  python3-devel
 BuildRequires:  python3-django-formtools
 BuildRequires:  python3-django-nose
 BuildRequires:  python3-mock
-BuildRequires:  python3-mox3
 BuildRequires:  python3-muranoclient
 BuildRequires:  python3-nose
 BuildRequires:  python3-oslo-config >= 2:5.1.0
