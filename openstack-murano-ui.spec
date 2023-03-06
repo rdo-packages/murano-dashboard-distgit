@@ -63,7 +63,8 @@ Requires:       python3-yaql >= 1.1.3
 Requires:       python3-pytz >= 2013.6
 Requires:       python3-yaml >= 3.12
 Requires:       python3-beautifulsoup4 >= 4.6.0
-Requires:       python3-semantic_version
+Requires:       python3-semantic_version >= 2.3.1
+Requires:       python3-designateclient >= 2.7.0
 
 %description
 Murano Dashboard
