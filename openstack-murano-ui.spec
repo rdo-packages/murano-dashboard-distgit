@@ -1,6 +1,12 @@
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
 %global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
+# we are excluding some BRs from automatic generator
+%global excluded_brs doc8 bandit pre-commit hacking flake8-import-order bashate nodeenv
+# Exclude sphinx from BRs if docs are disabled
+%if ! 0%{?with_doc}
+%global excluded_brs %{excluded_brs} sphinx openstackdocstheme
+%endif
 %global pypi_name murano-dashboard
 %global mod_name muranodashboard
 %global with_doc 1
@@ -16,7 +22,7 @@ Version:        XXX
 Release:        XXX
 Summary:        The UI component for the OpenStack murano service
 Group:          Applications/Communications
-License:        ASL 2.0
+License:        Apache-2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
 # Required for tarball sources verification
@@ -34,37 +40,10 @@ BuildRequires:  /usr/bin/gpgv2
 BuildRequires:  gettext
 BuildRequires:  git-core
 BuildRequires:  openstack-dashboard
-BuildRequires:  python3-castellan
 BuildRequires:  python3-devel
-BuildRequires:  python3-django-formtools
-BuildRequires:  python3-django-nose
-BuildRequires:  python3-mock
-BuildRequires:  python3-muranoclient
-BuildRequires:  python3-nose
-BuildRequires:  python3-oslo-config >= 2:5.1.0
-BuildRequires:  python3-pbr >= 2.0.0
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-testtools
-BuildRequires:  python3-yaql >= 1.1.3
+BuildRequires:  pyproject-rpm-macros
 BuildRequires:  openstack-macros
-BuildRequires:  python3-beautifulsoup4
-BuildRequires:  python3-semantic_version
-
 Requires:       openstack-dashboard >= 18.3.1
-Requires:       python3-castellan >= 0.18.0
-Requires:       python3-django-formtools >= 2.2
-# django-floppyforms is not packaged in Fedora yet.
-#Requires:       python3-django-floppyforms
-Requires:       python3-iso8601 >= 0.1.11
-Requires:       python3-muranoclient >= 0.8.2
-Requires:       python3-oslo-log >= 3.36.0
-Requires:       python3-pbr >= 2.0.0
-Requires:       python3-yaql >= 1.1.3
-Requires:       python3-pytz >= 2013.6
-Requires:       python3-yaml >= 3.12
-Requires:       python3-beautifulsoup4 >= 4.6.0
-Requires:       python3-semantic_version >= 2.3.1
-Requires:       python3-designateclient >= 2.7.0
 
 %description
 Murano Dashboard
@@ -75,10 +54,6 @@ Python package - murano-dashboard
 %if 0%{?with_doc}
 %package doc
 Summary:        Documentation for OpenStack murano dashboard
-BuildRequires:  python3-sphinx
-BuildRequires:  python3-openstackdocstheme
-BuildRequires:  python3-reno
-
 %description doc
 %{common_desc}
 
@@ -91,31 +66,51 @@ This package contains the documentation.
 %{gpgverify}  --keyring=%{SOURCE102} --signature=%{SOURCE101} --data=%{SOURCE0}
 %endif
 %autosetup -n %{pypi_name}-%{upstream_version} -S git
-# Let RPM handle the dependencies
-%py_req_cleanup
 
-# disable warning-is-error, this project has intersphinx in docs
-# so some warnings are generated in network isolated build environment
-# as koji
-sed -i 's/^warning-is-error.*/warning-is-error = 0/g' setup.cfg
+sed -i /^[[:space:]]*-c{env:.*_CONSTRAINTS_FILE.*/d tox.ini
+sed -i "s/^deps = -c{env:.*_CONSTRAINTS_FILE.*/deps =/" tox.ini
+sed -i /^minversion.*/d tox.ini
+sed -i /^requires.*virtualenv.*/d tox.ini
+
+sed -i /.*tarballs.openstack.org/d tox.ini
+
+# Exclude some bad-known BRs
+for pkg in %{excluded_brs}; do
+  for reqfile in doc/requirements.txt test-requirements.txt; do
+    if [ -f $reqfile ]; then
+      sed -i /^${pkg}.*/d $reqfile
+    fi
+  done
+done
+
+# Automatic BR generation
+%generate_buildrequires
+%if 0%{?with_doc}
+  %pyproject_buildrequires -t -e %{default_toxenv},docs
+%else
+  %pyproject_buildrequires -t -e %{default_toxenv}
+%endif
 
 %build
-%{py3_build}
-# Generate i18n files
-pushd build/lib/%{mod_name}
-django-admin compilemessages
-popd
+%pyproject_wheel
+
 
 %if 0%{?with_doc}
 # generate html docs
 export OSLO_PACKAGE_VERSION=%{upstream_version}
-sphinx-build -b html doc/source doc/build/html
+%tox -e docs
 # remove the sphinx-build leftovers
 rm -rf doc/build/html/.{doctrees,buildinfo}
 %endif
 
 %install
-%{py3_install}
+%pyproject_install
+
+# Generate i18n files
+pushd %{buildroot}/%{python3_sitelib}/%{mod_name}
+django-admin compilemessages
+popd
+
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled
 mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d
 mkdir -p %{buildroot}/var/cache/murano-dashboard
@@ -145,7 +140,7 @@ fi
 %license LICENSE
 %doc README.rst
 %{python3_sitelib}/muranodashboard
-%{python3_sitelib}/murano_dashboard*.egg-info
+%{python3_sitelib}/murano_dashboard*.dist-info
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/local_settings.d/*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/*
 %dir %attr(755, apache, apache) /var/cache/murano-dashboard
