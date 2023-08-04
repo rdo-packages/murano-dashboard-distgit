@@ -73,6 +73,7 @@ sed -i /^minversion.*/d tox.ini
 sed -i /^requires.*virtualenv.*/d tox.ini
 
 sed -i /.*tarballs.openstack.org/d tox.ini
+sed -i '/sphinx-build/ s/-W//' tox.ini
 
 # Exclude some bad-known BRs
 for pkg in %{excluded_brs}; do
