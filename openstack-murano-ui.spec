@@ -1,5 +1,6 @@
+%global milestone .0rc1
 %{!?sources_gpg: %{!?dlrn:%global sources_gpg 1} }
-%global sources_gpg_sign 0x2426b928085a020d8a90d0d879ab7008d0896c8a
+%global sources_gpg_sign 0x815AFEC729392386480E076DCC0DFE2D21C023C9
 %{!?upstream_version: %global upstream_version %{version}%{?milestone}}
 # we are excluding some BRs from automatic generator
 %global excluded_brs doc8 bandit pre-commit hacking flake8-import-order bashate nodeenv
@@ -18,13 +19,17 @@ an application catalog, running applications and created environments alongside 
 with all other OpenStack resources.
 
 Name:           openstack-murano-ui
-Version:        XXX
-Release:        XXX
+Version:        16.0.0
+Release:        0.1%{?milestone}%{?dist}
 Summary:        The UI component for the OpenStack murano service
 Group:          Applications/Communications
 License:        Apache-2.0
 URL:            https://github.com/openstack/%{pypi_name}
 Source0:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz
+#
+# patches_base=16.0.0.0rc1
+#
+
 # Required for tarball sources verification
 %if 0%{?sources_gpg} == 1
 Source101:        https://tarballs.openstack.org/%{pypi_name}/%{pypi_name}-%{upstream_version}.tar.gz.asc
@@ -153,3 +158,6 @@ fi
 %endif
 
 %changelog
+* Fri Sep 15 2023 RDO <dev@lists.rdoproject.org> 16.0.0-0.1.0rc1
+- Update to 16.0.0.0rc1
+
