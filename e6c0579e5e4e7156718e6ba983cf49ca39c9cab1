@@ -1,0 +1,8 @@
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Workflow+1: Alfredo Moralejo <amoralej@redhat.com>
+Code-Review+2: Alfredo Moralejo <amoralej@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Fri, 15 Sep 2023 14:43:16 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/openstack/murano-dashboard-distgit/+/50034
+Project: openstack/murano-dashboard-distgit
+Branch: refs/heads/bobcat-rdo
